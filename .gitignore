@@ -14,3 +14,4 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+.history/src/components/BlogNav_20200817221221.vue
