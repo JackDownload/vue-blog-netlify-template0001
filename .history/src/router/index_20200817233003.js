@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Blog from '../components'
-import Recipe from '../components'
 
 Vue.use(Router)
 
@@ -22,9 +21,5 @@ export default new Router({
     name: 'post',
     props: true,
     component: Blog
-  }, {
-    path: '/recipe',
-    name: 'recipe',
-    component: Recipe
   }]
 })

@@ -22,9 +22,5 @@ export default new Router({
     name: 'post',
     props: true,
     component: Blog
-  }, {
-    path: '/recipe',
-    name: 'recipe',
-    component: Recipe
   }]
 })
