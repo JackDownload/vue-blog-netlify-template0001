@@ -17,7 +17,7 @@ import BlogFooter from './BlogFooter'
 
 export default {
   name: 'recipe',
-  components: { BlogTitle, BlogNav, BlogFeed, BlogPost, BlogFooter },
+  components: { RecipeTitle, BlogNav, RecipeFeed, RecipeFood, BlogFooter },
   resource: 'Recipe',
   props: {
     food: String,
