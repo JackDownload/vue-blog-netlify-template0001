@@ -4,22 +4,11 @@
       <figure class="preview__figure" :class="figureClass" :style="getBgImg(food.image)">
         <transition name="v--fade">
           <figcaption v-if="!reading || $device.phone" class="preview__details">
-            <router-link class="preview__title"
-              :to="`/read/${food.id}`"
-              @click.native="scrollTo(0, 220, scrollDelay)">
-              {{ food.title }}
-            </router-link>
-
             <div class="preview__meta">
               <time class="preview__published">
                 {{ prettyDate(food.published) }}
               </time>
 
-              <router-link class="preview__author"
-                :to="`/by/${kebabify(food.author)}`"
-                @click.native="scrollTo(0, 220, scrollDelay)">
-                {{ food.author }}
-              </router-link>
             </div>
           </figcaption>
         </transition>
@@ -72,7 +61,6 @@ export default {
   },
 
   methods: {
-    scrollTo,
     kebabify,
     prettyDate,
     getBgImg(src) {
