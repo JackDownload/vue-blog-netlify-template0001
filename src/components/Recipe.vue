@@ -1,6 +1,6 @@
 <template>
-  <main class="blog" :class="{ 'blog--reading': this.post }">
-    <blog-title :blog-name="title" :filters="filters" />
+  <main class="blog" :class="{ 'recipe--reading': this.food }">
+    <blog-title :food-name="title" :filters="filters" />
     <blog-nav :content="content" :filters="filters" :navs="navs"/>
     <blog-feed :filters="filters"/>
     <blog-post :post="post"/>
@@ -20,7 +20,7 @@ export default {
   components: { BlogTitle, BlogNav, BlogFeed, BlogPost, BlogFooter },
   resource: 'Blog',
   props: {
-    post: String,
+    food: String,
     author: String
   },
 
@@ -29,7 +29,7 @@ export default {
       navs: 0,
       title: '',
       labels: {
-        post: '',
+        food: '',
         author: ''
       }
     }
@@ -42,7 +42,7 @@ export default {
     filters() {
       let filters = {}
 
-      if (this.post) filters.post = this.post
+      if (this.food) filters.food = this.food
       if (this.author) filters.author = this.author
 
       return filters
@@ -56,7 +56,7 @@ export default {
   },
 
   beforeMount() {
-    this.$getResource('blog')
+    this.$getResource('recipe')
   }
 }
 </script>
