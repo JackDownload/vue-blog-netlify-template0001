@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { scrollTo, kebabify, prettyDate } from 'src\helpers.js'
+import { scrollTo, kebabify, prettyDate } from '../helpers'
 
 export default {
   name: 'blog-feed',
