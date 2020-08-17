@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Blog from '../components'
+import Blog from '../components/Blog'
 import Recipe from '../components/Recipe'
 
 Vue.use(Router)
@@ -30,6 +30,6 @@ export default new Router({
     path: '/recipes/:recipe',
     name: 'recipe',
     props: true,
-    component: Blog
+    component: Recipe
   }]
 })

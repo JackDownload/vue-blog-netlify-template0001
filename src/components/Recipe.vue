@@ -1,24 +1,24 @@
 <template>
-  <main class="blog" :class="{ 'recipe--reading': this.food }">
-    <blog-title :food-name="title" :filters="filters" />
-    <blog-nav :content="content" :filters="filters" :navs="navs"/>
-    <blog-feed :filters="filters"/>
-    <blog-post :post="post"/>
-    <blog-footer/>
+  <main class="recipe" :class="{ 'recipe--reading': this.food }">
+    <recipe-title :food-name="title" :filters="filters" />
+    <recipe-nav :content="content" :filters="filters" :navs="navs"/>
+    <recipe-feed :filters="filters"/>
+    <recipe-food :food="food"/>
+    <recipe-footer/>
   </main>
 </template>
 
 <script>
-import BlogTitle from './BlogTitle'
+import RecipeTitle from './RecipeTitle'
 import BlogNav from './BlogNav'
-import BlogFeed from './BlogFeed'
-import BlogPost from './BlogPost'
+import RecipeFeed from './RecipeFeed'
+import RecipeFood from './RecipeFood'
 import BlogFooter from './BlogFooter'
 
 export default {
-  name: 'blog',
+  name: 'recipe',
   components: { BlogTitle, BlogNav, BlogFeed, BlogPost, BlogFooter },
-  resource: 'Blog',
+  resource: 'Recipe',
   props: {
     food: String,
     author: String
