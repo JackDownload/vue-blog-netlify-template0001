@@ -1,24 +1,24 @@
 <template>
   <transition-group tag="ul" :name="transition"  class="blog__feed">
-    <li v-for="food in feed" class="preview" :key="food.id">
-      <figure class="preview__figure" :class="figureClass" :style="getBgImg(food.image)">
+    <li v-for="post in feed" class="preview" :key="post.id">
+      <figure class="preview__figure" :class="figureClass" :style="getBgImg(post.image)">
         <transition name="v--fade">
           <figcaption v-if="!reading || $device.phone" class="preview__details">
             <router-link class="preview__title"
-              :to="`/read/${food.id}`"
+              :to="`/read/${post.id}`"
               @click.native="scrollTo(0, 220, scrollDelay)">
-              {{ food.title }}
+              {{ post.title }}
             </router-link>
 
             <div class="preview__meta">
               <time class="preview__published">
-                {{ prettyDate(food.published) }}
+                {{ prettyDate(post.published) }}
               </time>
 
               <router-link class="preview__author"
-                :to="`/by/${kebabify(food.author)}`"
+                :to="`/by/${kebabify(post.author)}`"
                 @click.native="scrollTo(0, 220, scrollDelay)">
-                {{ food.author }}
+                {{ post.author }}
               </router-link>
             </div>
           </figcaption>
@@ -44,28 +44,28 @@ export default {
 
   data() {
     return {
-      foods: [],
+      posts: [],
       transition: 'preview-appear'
     }
   },
 
   computed: {
-    reading() { return this.filters.food },
+    reading() { return this.filters.post },
     scrollDelay() { return (this.$device.phone) ? 0 : 560 },
     figureClass() {
       return { 'preview__figure--mobile': this.$device.phone && this.reading }
     },
     feed() {
       const filterBy = {
-        food: (filter, { id }) => filter === id,
+        post: (filter, { id }) => filter === id,
         author: (filter, { author }) => filter === this.kebabify(author)
       }
 
-      if (!Object.keys(this.filters).length) return this.foods
+      if (!Object.keys(this.filters).length) return this.posts
 
-      return this.foods.filter(food => {
+      return this.posts.filter(post => {
         return Object.keys(this.filters).every(filter => {
-          return filterBy[filter](this.filters[filter], food)
+          return filterBy[filter](this.filters[filter], post)
         })
       })
     }
@@ -78,12 +78,12 @@ export default {
     getBgImg(src) {
       return { backgroundImage: `url(${src})` }
     },
-    stackFoods(foods) {
+    stackPosts(posts) {
       let interval
       const stack = () => {
-        this.foods.push(foods.shift())
+        this.posts.push(posts.shift())
 
-        if (!foods.length) {
+        if (!posts.length) {
           this.transition = 'preview'
           clearInterval(interval)
         }
@@ -95,11 +95,11 @@ export default {
 
   beforeMount() {
     this.$getResource('feed')
-      .then(foods => {
+      .then(posts => {
         if (!Object.keys(this.filters).length) {
-          this.stackFoods(foods)
+          this.stackPosts(posts)
         } else {
-          this.foods = foods
+          this.posts = posts
           this.transition = 'preview'
         }
       })
