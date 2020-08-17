@@ -1,93 +1,62 @@
 <template>
-  <transition-group tag="ul" :name="transition"  class="blog__feed">
-    <li v-for="food in feed" class="preview" :key="food.id">
-      <figure class="preview__figure" :class="figureClass" :style="getBgImg(food.image)">
-        <transition name="v--fade">
-          <figcaption v-if="!reading || $device.phone" class="preview__details">
-            <div class="preview__meta">
-              <time class="preview__published">
-                {{ prettyDate(food.published) }}
-              </time>
-
-            </div>
-          </figcaption>
-        </transition>
-      </figure>
-    </li>
-  </transition-group>
+  <main class="blog" :class="{ 'blog--reading': this.post }">
+    <blog-title :blog-name="title" :filters="filters" />
+    <blog-nav :content="content" :filters="filters" :navs="navs"/>
+    <blog-feed :filters="filters"/>
+    <blog-post :post="post"/>
+    <blog-footer/>
+  </main>
 </template>
 
 <script>
+import BlogTitle from './BlogTitle'
+import BlogNav from './BlogNav'
+import BlogFeed from './BlogFeed'
+import BlogPost from './BlogPost'
+import BlogFooter from './BlogFooter'
 
 export default {
-  name: 'blog-feed',
-  resource: 'BlogFeed',
-
+  name: 'blog',
+  components: { BlogTitle, BlogNav, BlogFeed, BlogPost, BlogFooter },
+  resource: 'Blog',
   props: {
-    filters: {
-      type: Object,
-      default: () => {}
-    }
+    post: String,
+    author: String
   },
 
   data() {
     return {
-      foods: [],
-      transition: 'preview-appear'
+      navs: 0,
+      title: '',
+      labels: {
+        post: '',
+        author: ''
+      }
     }
   },
 
   computed: {
-    reading() { return this.filters.food },
-    scrollDelay() { return (this.$device.phone) ? 0 : 560 },
-    figureClass() {
-      return { 'preview__figure--mobile': this.$device.phone && this.reading }
+    content() {
+      return { title: this.title, labels: this.labels }
     },
-    feed() {
-      const filterBy = {
-        food: (filter, { id }) => filter === id,
-        author: (filter, { author }) => filter === this.kebabify(author)
-      }
+    filters() {
+      let filters = {}
 
-      if (!Object.keys(this.filters).length) return this.foods
+      if (this.post) filters.post = this.post
+      if (this.author) filters.author = this.author
 
-      return this.foods.filter(food => {
-        return Object.keys(this.filters).every(filter => {
-          return filterBy[filter](this.filters[filter], food)
-        })
-      })
+      return filters
     }
   },
 
-  methods: {
-    getBgImg(src) {
-      return { backgroundImage: `url(${src})` }
-    },
-    stackFoods(foods) {
-      let interval
-      const stack = () => {
-        this.foods.push(foods.shift())
-
-        if (!foods.length) {
-          this.transition = 'preview'
-          clearInterval(interval)
-        }
-      }
-
-      interval = setInterval(stack, 125)
+  watch: {
+    '$route.name' (to, from) {
+      if (to !== from) this.navs++
     }
   },
 
   beforeMount() {
-    this.$getResource('feed')
-      .then(foods => {
-        if (!Object.keys(this.filters).length) {
-          this.stackFoods(foods)
-        } else {
-          this.foods = foods
-          this.transition = 'preview'
-        }
-      })
+    this.$getResource('blog')
   }
 }
 </script>
