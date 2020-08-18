@@ -12,6 +12,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "cosmicjs": "^3.3.1 ",
     "capitalize": "^1.0.0",
     "connect-history-api-fallback": "^1.5.0",
     "express": "^4.16.2",
