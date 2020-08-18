@@ -10,7 +10,7 @@ export default new Router({
   linkActiveClass: 'active',
   routes: [{
     path: '/blog',
-    name: 'feed',
+    name: 'blog',
     component: Blog
   }, {
     path: '/blog/by/:author',
@@ -32,7 +32,7 @@ export default new Router({
     props: true,
     component: Recipe
   }, {
-    path: '/read/:recipe',
+    path: '/recipe/:recipe',
     name: 'recipe',
     props: true,
     component: Recipe
