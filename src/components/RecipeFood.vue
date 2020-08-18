@@ -17,7 +17,7 @@
 
       <footer class="food__footer">
         <vue-disqus v-if="commentsReady" shortname="vue-blog-demo"
-          :key="food" :identifier="food" :url="`https://vue-blog-demo.netlify.com/recipes/${food}`"/>
+          :key="food" :identifier="food" :url="`https://vue-blog-demo.netlify.com/recipe/${food}`"/>
       </footer>
     </article>
   </transition>

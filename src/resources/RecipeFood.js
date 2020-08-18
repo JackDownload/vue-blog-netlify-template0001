@@ -1,7 +1,7 @@
 export default {
-  recipe(id) {
+  recipe(_id) {
     return {
-      path: `/object/${id}`,
+      path: `/object/${_id}`,
       resolve: (response, mappers) => {
         let { title, content, created_at, metadata } = response.object
         let meta = {
