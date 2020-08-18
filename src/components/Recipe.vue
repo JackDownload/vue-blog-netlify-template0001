@@ -19,8 +19,8 @@ const Cosmic = require('cosmicjs')
 const api = Cosmic()
 // Set these values, found in Bucket > Settings after logging in at https://app.cosmicjs.com/login
 const bucket = api.bucket({
-  slug: 'YOUR_BUCKET_SLUG',
-  read_key: 'YOUR_BUCKET_READ_KEY'
+  slug: COSMIC_BUCKET,
+  read_key: COSMIC_READ_KEY
 })
 export default {
   data() {
