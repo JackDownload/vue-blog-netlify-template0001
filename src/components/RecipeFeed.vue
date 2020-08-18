@@ -16,7 +16,7 @@
               </time>
 
               <router-link class="preview__author"
-                :to="`recipe/by/${kebabify(food.author)}`"
+                :to="`/by/${kebabify(food.author)}`"
                 @click.native="scrollTo(0, 220, scrollDelay)">
                 {{ food.author }}
               </router-link>

@@ -12,7 +12,8 @@ export default {
       // get fetch path and response resolver/mapper
       let { path, resolve } = resources[name][method](options)
       let uri = '';
-      if (method === 'recipe') {
+      let schema = ('blog', 'recipe');
+      if (method === schema) {
         uri = '/static/api' + path
       } else {
         uri = endpoint + path + '?hide_metafields=true&read_key=' + config.COSMIC_READ_KEY

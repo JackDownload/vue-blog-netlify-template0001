@@ -5,7 +5,7 @@
         <h2 class="post__title">{{ title }}</h2>
 
         <h3 class="post__meta">by <router-link class="post__author"
-          :to="`/blog/by/${kebabify(author)}`">{{ author }}</router-link>
+          :to="`/by/${kebabify(author)}`">{{ author }}</router-link>
           <span class="post__sep"></span>
           <time>{{ prettyDate(published) }}</time>
         </h3>

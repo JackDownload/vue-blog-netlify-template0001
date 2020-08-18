@@ -5,7 +5,7 @@
         <h2 class="food__title">{{ title }}</h2>
 
         <h3 class="food__meta">by <router-link class="food__author"
-          :to="`/recipe/by/${kebabify(author)}`">{{ author }}</router-link>
+          :to="`/by/${kebabify(author)}`">{{ author }}</router-link>
           <span class="food__sep"></span>
           <time>{{ prettyDate(published) }}</time>
         </h3>
