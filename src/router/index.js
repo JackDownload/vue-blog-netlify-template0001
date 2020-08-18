@@ -9,7 +9,7 @@ export default new Router({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [{
-    path: '/blog',
+    path: '/',
     name: 'feed',
     component: Blog
   }, {
@@ -23,8 +23,8 @@ export default new Router({
     props: true,
     component: Blog
   }, {
-    path: '/',
-    name: 'feed',
+    path: '/recipe',
+    name: 'recipe',
     component: Recipe
   }, {
     path: '/recipe/:author',
