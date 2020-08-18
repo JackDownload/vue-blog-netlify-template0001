@@ -34,7 +34,7 @@ export default {
       props: 'slug,title,content,metadata' // Limit the API response data by props
     })
     const foods = await data.objects
-    return { 
+    return {
       foods,
       loading: false
     }
