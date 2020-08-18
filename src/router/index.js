@@ -13,7 +13,7 @@ export default new Router({
     name: 'feed',
     component: Blog
   }, {
-    path: '/blog/by/:author',
+    path: '/by/:author',
     name: 'author',
     props: true,
     component: Blog
