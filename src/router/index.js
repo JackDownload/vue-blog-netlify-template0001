@@ -9,11 +9,11 @@ export default new Router({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [{
-    path: '/',
+    path: '/blog',
     name: 'feed',
     component: Blog
   }, {
-    path: '/by/:author',
+    path: '/blog/by/:author',
     name: 'author',
     props: true,
     component: Blog
@@ -23,7 +23,7 @@ export default new Router({
     props: true,
     component: Blog
   }, {
-    path: '/recipes',
+    path: '/',
     name: 'feed',
     component: Recipe
   }, {
@@ -32,7 +32,7 @@ export default new Router({
     props: true,
     component: Recipe
   }, {
-    path: '/recipe/:recipe',
+    path: '/read/:recipe',
     name: 'recipe',
     props: true,
     component: Recipe
