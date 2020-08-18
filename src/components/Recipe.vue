@@ -1,12 +1,10 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+  <div id="recipe">
     <h1>Cosmic Vue App</h1>
     <div v-if="loading">Loading...</div>
     <ul>
       <li v-for="food in foods" :key="food.slug">
         <div>{{ food.title }}</div>
-        <img alt="" :src="food.metadata.hero.imgix_url + '?w=400'"/>
       </li>
     </ul>
   </div>
@@ -36,7 +34,7 @@ export default {
       this.loading = true
       bucket.getObjects({
         type: 'foods',
-        props: 'slug,title,content,metadata' // Limit the API response data by props
+        props: 'slug,title' // Limit the API response data by props
       }).then(data => {
         const foods = data.objects
         this.loading = false
