@@ -1,62 +1,71 @@
+// pages/index.vue
 <template>
-  <main class="recipe" :class="{ 'recipe--reading': this.food }">
-    <recipe-title :food-name="title" :filters="filters" />
-    <recipe-nav :content="content" :filters="filters" :navs="navs"/>
-    <recipe-feed :filters="filters"/>
-    <recipe-food :food="food"/>
-    <recipe-footer/>
-  </main>
+  <div class="container">
+    <div>
+      <Logo />
+      <h1 class="title">
+        cosmic-nuxt-app
+      </h1>
+      <div v-if="loading">Loading...</div>
+      <div v-for="food in foods" :key="food.slug">
+        <h3>{{ food.title }}</h3>
+        <img alt="" :src="food.metadata.hero.imgix_url + '?w=400'"/>
+      </div>
+    </div>
+  </div>
 </template>
-
 <script>
-import RecipeTitle from './RecipeTitle'
-import BlogNav from './BlogNav'
-import RecipeFeed from './RecipeFeed'
-import RecipeFood from './RecipeFood'
-import BlogFooter from './BlogFooter'
-
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+// Set these values, found in Bucket > Settings after logging in at https://app.cosmicjs.com/login
+const bucket = api.bucket({
+  slug: 'YOUR_BUCKET_SLUG',
+  read_key: 'YOUR_BUCKET_READ_KEY'
+})
 export default {
-  name: 'recipe',
-  components: { RecipeTitle, BlogNav, RecipeFeed, RecipeFood, BlogFooter },
-  resource: 'Recipe',
-  props: {
-    food: String,
-    author: String
-  },
-
   data() {
     return {
-      navs: 0,
-      title: '',
-      labels: {
-        food: '',
-        author: ''
-      }
+      loading: true
     }
   },
-
-  computed: {
-    content() {
-      return { title: this.title, labels: this.labels }
-    },
-    filters() {
-      let filters = {}
-
-      if (this.food) filters.food = this.food
-      if (this.author) filters.author = this.author
-
-      return filters
+  async asyncData () {
+    const data = await bucket.getObjects({
+      type: 'foods',
+      props: 'slug,title,content,metadata' // Limit the API response data by props
+    })
+    const foods = await data.objects
+    return { 
+      foods,
+      loading: false
     }
-  },
-
-  watch: {
-    '$route.name' (to, from) {
-      if (to !== from) this.navs++
-    }
-  },
-
-  beforeMount() {
-    this.$getResource('recipe')
   }
 }
 </script>
+<style>
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-family:
+    'Quicksand',
+    'Source Sans Pro',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+</style>
