@@ -26,6 +26,12 @@ export default new Router({
     path: '/recipes',
     name: 'recipe',
     component: Recipe
+  },
+  , {
+    path: '/recipe/:author',
+    name: 'author',
+    props: true,
+    component: Recipe
   }, {
     path: '/recipe/:recipe',
     name: 'recipe',
