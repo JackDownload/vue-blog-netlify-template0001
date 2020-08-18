@@ -9,8 +9,8 @@ export default new Router({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [{
-    path: '/blog',
-    name: 'blog',
+    path: '/',
+    name: 'feed',
     component: Blog
   }, {
     path: '/blog/by/:author',
@@ -23,8 +23,8 @@ export default new Router({
     props: true,
     component: Blog
   }, {
-    path: '/',
-    name: 'feed',
+    path: '/recipe',
+    name: 'recipe',
     component: Recipe
   }, {
     path: '/recipe/by/:author',
