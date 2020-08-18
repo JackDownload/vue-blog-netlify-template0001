@@ -57,7 +57,7 @@ export default {
     },
     feed() {
       const filterBy = {
-        food: (filter, { _id }) => filter === _id,
+        food: (filter, { id }) => filter === id,
         author: (filter, { author }) => filter === this.kebabify(author)
       }
 
