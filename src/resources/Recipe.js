@@ -9,7 +9,7 @@ export default {
         return mappers.merge({
           title: config.RECIPE_TITLE || recipe.title,
           labels: {
-            post: recipe.post_label,
+            food: recipe.food_label,
             author: recipe.author_label
           }
         })

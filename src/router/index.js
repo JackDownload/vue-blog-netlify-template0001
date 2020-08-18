@@ -27,7 +27,7 @@ export default new Router({
     name: 'feed',
     component: Recipe
   }, {
-    path: '/recipe/:author',
+    path: '/recipe/by/:author',
     name: 'author',
     props: true,
     component: Recipe
