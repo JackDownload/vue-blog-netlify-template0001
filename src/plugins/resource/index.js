@@ -13,7 +13,7 @@ export default {
       let { path, resolve } = resources[name][method](options)
       let uri = '';
       let schema = ('blog', 'recipe');
-      if (method === schema) {
+      if (method ===  schema) {
         uri = '/static/api' + path
       } else {
         uri = endpoint + path + '?hide_metafields=true&read_key=' + config.COSMIC_READ_KEY
